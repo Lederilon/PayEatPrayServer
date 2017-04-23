@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Bootstrap Example</title>
+		<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+					<link rel="stylesheet" type="text/css" href="css/index.css">
+						<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"> </script>
+						<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
+
+						<script>
+$(function(){
+
+  $(".dropdown-menu li a").click(function(){
+
+    $(".dropdown .btn:first-child").text($(this).text());
+     $(".dropdown .btn:first-child").val($(this).text());
+  });
+
+});
+						</script>
+
+						<script type="text/javascript">
+    $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+						</script>
+
+
+
+					</head>
+					<body>
+
+						<div class="container">
+							<div class="row">
+								<div class="span12">
+									<div class="" id="loginModal">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+											<h3>У вас уже есть аккаунт?</h3>
+										</div>
+										<div class="modal-body">
+											<div class="well">
+												<ul class="nav nav-tabs">
+													<li class="active">
+														<a href="#login" data-toggle="tab">Войти</a>
+													</li>
+													<li>
+														<a href="#create" data-toggle="tab">Создать аккаунт</a>
+													</li>
+												</ul>
+												<div id="myTabContent" class="tab-content">
+													<div class="tab-pane active in" id="login">
+
+														<div id="legend">
+															<legend class="">Вход</legend>
+														</div>    
+
+														<form class="form-horizontal" method = "POST" action = "../Authentification" >
+															<div class="form-group">
+																<label class="control-label col-sm-2" for="email">Логин:</label>
+																<div class="col-sm-10">
+																	<input type="text" class="form-control" id="email" placeholder="Введите логин" name = login>
+																	</div>
+																</div>
+																<div class="form-group">
+																	<label class="control-label col-sm-2" for="pwd">Пароль:</label>
+																	<div class="col-sm-10"> 
+																		<input type="password" class="form-control" id="pwd" placeholder="Введите пароль" name = "password">
+																		</div>
+																	</div>
+																	<div class="form-group"> 
+																		<div class="col-sm-offset-2 col-sm-10">
+																			<div class="checkbox">
+																				<label>
+																					<input type="checkbox"> Запомнить меня</label>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="form-group"> 
+																			<div class="col-sm-offset-2 col-sm-10">
+																				<button  type="submit" class="btn btn-primary">Отправить</button>
+																			</div>
+																		</div>
+																	</form>               
+																</div>
+
+
+
+																<div class="tab-pane fade" id="create">
+
+
+
+																	<div id="legend">
+																		<legend class="">Регистрация</legend>
+																	</div>  
+																	<form class="form-horizontal" method = "POST" action = "../Registration">
+
+																		<div class="form-group">
+																			<label class="control-label col-sm-2">Кем вы будете?</label>
+																			<div class = "col-sm-10">
+																				<div class="radio-inline">
+																					<label>
+																						<input type="radio" name="usertypeCustomer">Пользователь</label>
+																					</div>
+																					<div class="radio-inline">
+																						<label>
+																							<input type="radio" name="usertypeCooking">Заведение общественного питания</label>
+																						</div>
+																						<div class="radio-inline">
+																							<label>
+																								<input type="radio" name="usertypeShipment">Служба доставки</label>
+																							</div>
+																						</div>
+																					</div>
+
+																					<div class="form-group">
+																						<label class="control-label col-sm-2" for="email">Имя\Название:</label>
+																						<div class="col-sm-10">
+																							<input type="text" name = "name" class="form-control" id="email" placeholder="Введите логин">
+																							</div>
+																						</div>
+																						<div class="form-group">
+																							<label class="control-label col-sm-2" for="email">Логин:</label>
+																							<div class="col-sm-10">
+																								<input type="text" name = "login" class="form-control" id="email" placeholder="Придумайте логин">
+																								</div>
+																							</div>
+
+																							<div class="form-group">
+																								<label class="control-label col-sm-2" for="email">Придумайте пароль:</label>
+																								<div class="col-sm-10">
+																									<input type="text" name = "password" class="form-control" id="email" placeholder="">
+																									</div>
+																								</div>
+
+																								<div class="form-group">
+																									<label class="control-label col-sm-2" for="email">Подтвердите пароль:</label>
+																									<div class="col-sm-10">
+																										<input type="text" name = "passwordConfirmation" class="form-control" id="email" placeholder="">
+																										</div>
+																									</div>
+
+																									<div class="form-group">
+																										<label class="control-label col-sm-2" for="email">Дата рождения:</label>
+																										<div class="col-sm-10">
+																											<div class='input-group date' id='datetimepicker1'>
+																												<input type='text' class="form-control"  name = "birthDate">
+																												<span class="input-group-addon">
+																													<span class="glyphicon glyphicon-calendar"/>
+																												</span>
+																											</div>
+																										</div>
+																									</div>
+
+																									<div class="form-group">
+																										<label class="control-label col-sm-2" for="email">Пол:</label>
+																										<div class="col-sm-10">
+																											<div class="dropdown">
+																												<button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Выберите пол
+																													<span class="caret"/>
+																												</button>
+																												<ul class="dropdown-menu">
+																													<li>
+																														<a href="#">Мужской</a>
+																													</li>
+																													<li>
+																														<a href="#">Женский</a>
+																													</li>
+																												</ul>
+																											</div>
+																										</div>
+																									</div>
+
+
+
+																									<div class="form-group">
+																										<label class="control-label col-sm-2" for="email">Почта:</label>
+																										<div class="col-sm-10">
+																											<input type="text" class="form-control" name = "email" id="email" placeholder="Введите адрес почты">
+																											</div>
+																										</div>
+
+
+
+																										<div class="form-group">
+																											<label class="control-label col-sm-2" for="email">Мобильный телефон:</label>
+																											<div class="col-sm-10">
+																												<input type="text" class="form-control" name = "phoneNumber" id="email" placeholder="+380">
+																												</div>
+																											</div>
+
+																											<div class="form-group"> 
+																												<div class="col-sm-offset-2 col-sm-10">
+																													<button  type="submit" class="btn btn-primary">Отправить</button>
+																												</div>
+																											</div>
+																										</form>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+
+																	</body>
+																</html>
