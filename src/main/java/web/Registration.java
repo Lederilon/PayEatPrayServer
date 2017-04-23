@@ -36,9 +36,31 @@ public class Registration extends javax.servlet.http.HttpServlet {
               DAOFactory daoFActory = new DAOFactoryMySQL("jdbc:mysql://localhost:3306/PAYEATPRAY?user=root&password=FICTIO53");
               ProfileDAO profileRep = daoFActory.getProfileDAO();
               Date date = new Date();
-              ProfileCategory category = new ProfileCategory(1, ProfileCategory.CategoryNames.C);
-              profileRep.createProfile(acountLogin, accountPassword, date, acountName, Profile.Sex.M, email, category);
-              request.getRequestDispatcher("WEB-INF/pages/registration/RegistrationApprowed.html").forward(request, response);
+              ProfileCategory category = null;
+
+              if(usertypeCustomer!=null && usertypeCustomer.equals("on"))
+              {
+                 category = new ProfileCategory(1, ProfileCategory.CategoryNames.C);
+              }
+              if(usertypeCooking!=null && usertypeCooking.equals("on"))
+              {
+                  category = new ProfileCategory(3, ProfileCategory.CategoryNames.F);
+              }
+              if(usertypeShipment!=null && usertypeShipment.equals("on"))
+              {
+                  category = new ProfileCategory(2, ProfileCategory.CategoryNames.D);
+              }
+              if(category!=null)
+              {
+                  Profile profile = profileRep.createProfile(acountLogin, accountPassword, date, acountName, Profile.Sex.M, email, category);
+                  request.getSession().setAttribute("profile",profile);
+                  request.getRequestDispatcher("WEB-INF/pages/registration/RegistrationApprowed.jsp").forward(request, response);
+              }
+              else
+              {
+                  throw new IllegalArgumentException();
+              }
+
           } catch (Exception e) {
               log("Error while Saving");
               request.getRequestDispatcher("WEB-INF/pages/registration/RegistrationImposible.html").forward(request, response);

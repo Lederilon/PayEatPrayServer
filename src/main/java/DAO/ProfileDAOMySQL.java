@@ -7,7 +7,9 @@ import java.sql.*;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
+
+import static domain.ProfileCategory.*;
+import static domain.ProfileCategory.CategoryNames.*;
 
 /**
  * ProfileDAO implementation for MySQL
@@ -83,7 +85,7 @@ public class ProfileDAOMySQL implements ProfileDAO{
                 creationDate = rs.getDate(6);
                 sex = Profile.Sex.valueOf(rs.getString(7));
                 //!!!!!!!Change after adding categoryDAO
-                category = new ProfileCategory(rs.getInt(8),ProfileCategory.CategoryNames.C);
+                category = new ProfileCategory(rs.getInt(8), C);
                 return new Profile(id,login,password,creationDate,name,sex,eMail,category);
             }
            else
@@ -137,6 +139,7 @@ public class ProfileDAOMySQL implements ProfileDAO{
             Profile.Sex sex;
             ProfileCategory category;
             Date creationDate;
+            int categoryCode;
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM profiles");
              while(rs.next()){
@@ -147,8 +150,9 @@ public class ProfileDAOMySQL implements ProfileDAO{
                 eMail = rs.getString(5);
                 creationDate = rs.getDate(6);
                 sex = Profile.Sex.valueOf(rs.getString(7));
-                //!!!!!!!Change after adding categoryDAO
-                 category = new ProfileCategory(rs.getInt(8),ProfileCategory.CategoryNames.C);
+                categoryCode = rs.getInt(8);
+                CategoryDAO dao = new CategoryDAO(connectionSource);
+                category = dao.getCategoryById(categoryCode);
                 Profile profile =  new Profile(id,login,password,creationDate,name,sex,eMail,category);
                 profiles.add(profile);
             }
@@ -156,6 +160,46 @@ public class ProfileDAOMySQL implements ProfileDAO{
         }
         finally{
             connection.close();
+        }
+    }
+
+    private class CategoryDAO {
+        private DAOFactory connectionSource;
+        public CategoryDAO(DAOFactory connSource){
+            connectionSource = connSource;
+        }
+        public ProfileCategory getCategoryById(int id) throws SQLException {
+            Connection connection = connectionSource.getConnection();
+            try {
+                String name;
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM profilecategories WHERE ID = ?");
+                statement.setInt(1, id);
+                ResultSet rs = statement.executeQuery();
+                if (rs.next()) {
+                    name = rs.getString(2);
+                    CategoryNames category;
+                    switch(name)
+                    {
+                        case "Delivery Service":
+                            category = D;
+                            break;
+
+                        case "Catering facilities":
+                            category = F;
+                            break;
+
+                        default:
+                            category = C;
+                            break;
+
+                    }
+                    return new ProfileCategory(id, category);
+                } else
+                    throw new IllegalArgumentException();
+            }
+            finally {
+                connection.close();
+            }
         }
     }
 }

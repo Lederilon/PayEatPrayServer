@@ -31,7 +31,8 @@ public class Authentification extends  javax.servlet.http.HttpServlet {
                break;
            }
         }
-        request.getRequestDispatcher("WEB-INF/pages/registration/AuthentificationConfirmed.html").forward(request, response);
+        request.getSession().setAttribute("profile",userProfile);
+        request.getRequestDispatcher("WEB-INF/pages/registration/AuthentificationConfirmed.jsp").forward(request, response);
         if (userProfile == null )
         {
             request.getRequestDispatcher("WEB-INF/pages/registration/AuthentificationFailed.html").forward(request, response);

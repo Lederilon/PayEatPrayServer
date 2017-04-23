@@ -23,6 +23,16 @@
         <url-pattern>/Authentification</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Restaurants</servlet-name>
+        <servlet-class>web.Restaurants</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Restaurants</servlet-name>
+        <url-pattern>/Restaurants</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
             <welcome-file>
                 start.html

@@ -5,6 +5,6 @@
     <title>Authentification Confirmed</title>
 </head>
 <body>
-Authentification Confirmed
+Authentification Confirmed for <%=((domain.Profile)session.getAttribute("profile")).getName()%>
 </body>
 </html>

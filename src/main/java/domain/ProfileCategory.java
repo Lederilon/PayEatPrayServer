@@ -35,7 +35,7 @@ public class ProfileCategory {
          * Crate categiry with given name
          * @param name
          */
-        CategoryNames(String  name) {
+         CategoryNames(String  name) {
             this. name = name;
         }
 
@@ -49,7 +49,10 @@ public class ProfileCategory {
 
     };
     private CategoryNames name;
-
+    public CategoryNames getName()
+    {
+        return name;
+    }
     /**
      *
      * @return  String representation of profile category
