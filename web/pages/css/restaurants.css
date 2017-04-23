@@ -1,0 +1,40 @@
+.search_with_params{
+	margin-top:40px;
+	padding-top:40px;
+	padding-bottom:60px;
+}
+
+.search{
+	margin-bottom:30px;
+}
+
+.restaurant_list {
+	margin-top:100px;
+}
+
+.restaurant_list img{
+	height:300px;
+	width:100%;
+	object-fit:cover;
+}
+
+.restaurant_item{
+	padding-bottom:40px;
+	margin-bottom:40px;
+}
+
+.restaurant_name{
+	font-size:42px;
+}
+
+.restaurant_type p{
+	font-size:24px;
+}
+
+.restaurant_name a{
+	text-decoration:none;
+}
+
+.pages_numbers{
+	margin-bottom:50px;
+}
