@@ -20,7 +20,7 @@ public class Authentification extends  javax.servlet.http.HttpServlet {
     String password = request.getParameter("password");
     try {
         java.sql.DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-        DAOFactory daoFactory = new DAOFactoryMySQL("jdbc:mysql://localhost:3306/PAYEATPRAY?user=root&password=FICTIO53");
+        DAOFactory daoFactory = new DAOFactoryMySQL("jdbc:mysql://localhost:3306/payeatpray?user=root&password=rootme");
         ProfileDAO profileRep = daoFactory.getProfileDAO();
         List<Profile> profiles = profileRep.getAll();
         Profile userProfile = null;

@@ -17,18 +17,24 @@ import static domain.ProfileCategory.CategoryNames.*;
  */
 public class ProfileDAOMySQL implements ProfileDAO{
     private DAOFactory connectionSource;
+
+    /**
+     * Constructor
+     * @param connSource - connection source
+     */
     public ProfileDAOMySQL(DAOFactory connSource){
         connectionSource = connSource;
     }
 
     /**
-     * @param login
-     * @param password
-     * @param registrationTime
-     * @param name
-     * @param sex
-     * @param eMail
-     * @param category
+     * Create new profile in database
+     * @param login profile login
+     * @param password prifile password
+     * @param registrationTime registration time
+     * @param name profile name
+     * @param sex profile sex
+     * @param eMail profile eMail
+     * @param category profile category
      * @return Profile
      */
     public Profile createProfile(String login, String password, Date registrationTime, String name, Profile.Sex sex, String eMail, ProfileCategory category) throws SQLException {
@@ -59,9 +65,9 @@ public class ProfileDAOMySQL implements ProfileDAO{
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Get profile from database by id
+     * @param id profile id
+     * @return profile
      * @throws SQLException
      */
     public Profile getById(int id) throws SQLException {
@@ -84,8 +90,8 @@ public class ProfileDAOMySQL implements ProfileDAO{
                 eMail = rs.getString(5);
                 creationDate = rs.getDate(6);
                 sex = Profile.Sex.valueOf(rs.getString(7));
-                //!!!!!!!Change after adding categoryDAO
-                category = new ProfileCategory(rs.getInt(8), C);
+                CategoryDAO categoryDAO = new CategoryDAO(connectionSource);
+                category = categoryDAO.getCategoryById(rs.getInt(8));
                 return new Profile(id,login,password,creationDate,name,sex,eMail,category);
             }
            else
@@ -94,12 +100,11 @@ public class ProfileDAOMySQL implements ProfileDAO{
         finally{
             connection.close();
         }
-
     }
 
     /**
-     *
-     * @param id
+     * Delete profile from database by id
+     * @param id profile id
      * @throws SQLException
      */
     public void deleteById(int id) throws SQLException {
@@ -114,19 +119,34 @@ public class ProfileDAOMySQL implements ProfileDAO{
     }
 
     /**
-     *
-     * @param profile
+     * Update given Profile in database
+     * @param profile - profile to update
      */
-    public void updateProfile(Profile profile) {
-
+    public void updateProfile(Profile profile) throws SQLException{
+        Connection connection = connectionSource.getConnection();
+        try {
+            PreparedStatement statement =
+                    connection.prepareStatement("UPDATE profiles SET name = ?,login = ?,password = ?,email = ?,registertime = ?,sex = ?,profilecategories_id = ? WHERE id = ?");
+            statement.setInt(8, profile.getId());
+            statement.setString(2, profile.getLogin());
+            statement.setString(3, profile.getPassword());
+            statement.setDate(5,new java.sql.Date(profile.getRegistrationTime().getTime()));
+            statement.setString(1,profile.getName());
+            statement.setString(6,profile.getSex().getName());
+            statement.setString(4, profile.getEmail());
+            statement.setInt(7,profile.getCategory().getId());
+            statement.executeUpdate();
+        }
+        finally {
+            connection.close();
+        }
     }
 
     /**
-     *
-     * @return
+     * Get all profiles from profiles table in database
+     * @return list of all profiles
      * @throws SQLException
      */
-
     public List<Profile> getAll() throws SQLException {
         Connection connection = connectionSource.getConnection();
         List<Profile> profiles = new LinkedList<Profile>();
@@ -163,11 +183,26 @@ public class ProfileDAOMySQL implements ProfileDAO{
         }
     }
 
+    /**
+     * DAO implemented to work with Categories
+     */
     private class CategoryDAO {
         private DAOFactory connectionSource;
+
+        /**
+         * Constructor
+         * @param connSource source of the connection
+         */
         public CategoryDAO(DAOFactory connSource){
             connectionSource = connSource;
         }
+
+        /**
+         * Get category by id
+         * @param id category id
+         * @return returns ProfileCategory object
+         * @throws SQLException
+         */
         public ProfileCategory getCategoryById(int id) throws SQLException {
             Connection connection = connectionSource.getConnection();
             try {

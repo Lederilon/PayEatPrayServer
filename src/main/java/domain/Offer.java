@@ -1,53 +1,30 @@
 package domain;
 
-import java.util.Date;
-
 /**
  * Conatins information about an Offer
  * @author Kostya Hrishenko
  */
 public class Offer {
-    private int price;
     private final int id;
-    private Date creationDate;
-    private Goods goods;
+    private int price;
+    private String name;
     private Profile creator;
 
     /**
-     * Construct new Offer
-     * @param price - goods price
-     * @param id
-     * @param creationDate -
-     * @param goods -
-     * @param creator - profile that create offer
+     * Constructor
+     * @param id offer id
+     * @param price offer price
+     * @param name offer name
+     * @param creator offer creator
      */
-    public Offer(int price, int id, Date creationDate, Goods goods, Profile creator) {
-        this.price = price;
-
+    public Offer(int id, int price, String name, Profile creator) {
         this.id = id;
-        this.creationDate = creationDate;
-        this.goods = goods;
+        this.price = price;
+        this.name = name;
         this.creator = creator;
     }
 
     /**
-     *
-     * @return Date - when created
-     */
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    /**
-     * Change creatin date
-     * @param creationDate - when created
-     */
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    /**
-     *
      * @return int - goods price
      */
     public int getPrice() {
@@ -63,23 +40,20 @@ public class Offer {
     }
 
     /**
-     *
-     * @return goods in offer
+     * @return name - offer name
      */
-    public Goods getGoods() {
-        return goods;
+    public String getName() {
+        return name;
     }
 
     /**
-     * Change goods in offer
-     * @param goods
+     * @param name - offer name
      */
-    public void setGoods(Goods goods) {
-        this.goods = goods;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
-     *
      * @return Profile - creator profile
      */
     public Profile getCreator() {
@@ -99,5 +73,12 @@ public class Offer {
      */
     public int getId() {
         return id;
+    }
+
+    /**
+     * @return String representation of offer
+     */
+    public String toString(){
+        return id+ " "+price+" "+name+" "+creator;
     }
 }

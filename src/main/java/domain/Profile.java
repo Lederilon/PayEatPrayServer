@@ -1,51 +1,43 @@
 package domain;
 
-import javax.persistence.*;
 import java.util.Date;
 /**
  * Describes user's profile
  * @author KostyaHrishenko
  */
 public class Profile {
-    public enum Sex{
-        M("M"),F("F");
-        private String name;
-        Sex(String  name) {
-            this. name = name;
-        }
-
-        public String getName() {
-            return  name;
-        }
-    };
-    public Profile(){
-
-    }
-    /**
-     * Can't be changed after creation
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private  int id;
-    @Column(name = "login", length = 32)
     private String login;
-    @Column(name = "password")
     private String password;
-    @Column(name = "registertime")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date registrationTime;
-    @Column(name = "name")
     private String name;
-    @Column(name = "sex")
     private Sex sex;
-    @ManyToOne
-    @JoinColumn(name="profilecategories_id", insertable=false, updatable=false)
     private ProfileCategory category;
-    @Column(name = "email")
     private String email;
 
     /**
-     *
+     * Counstruct new user's profile with given parameters
+     * @param id - profile id
+     * @param login - profile login
+     * @param password - profile password
+     * @param registrationTime - profile registration time
+     * @param name - profile name
+     * @param sex - profile sex
+     * @param eMail - profile email
+     * @param category - profile category
+     */
+    public Profile(int id,String login, String password, Date registrationTime, String name, Sex sex, String eMail,ProfileCategory category) {
+        this.login = login;
+        this.password = password;
+        this.registrationTime = registrationTime;
+        this.name = name;
+        this.sex = sex;
+        this.email = eMail;
+        this.category = category;
+        this.id = id;
+    }
+
+    /**
      * @return user's login
      */
     public String getLogin() {
@@ -54,14 +46,13 @@ public class Profile {
 
     /**
      * Change user's login
-     * @param login
+     * @param login - login
      */
     public void setLogin(String login) {
         this.login = login;
     }
 
     /**
-     *
      * @return user's password
      */
 
@@ -71,14 +62,13 @@ public class Profile {
 
     /**
      * Change users password
-     * @param password
+     * @param password - password
      */
     public void setPassword(String password) {
         this.password = password;
     }
 
     /**
-     *
      * @return user's name
      */
     public String getName() {
@@ -87,7 +77,7 @@ public class Profile {
 
     /**
      * Change users name
-     * @param name
+     * @param name - name
      */
     public void setName(String name) {
         this.name = name;
@@ -102,7 +92,7 @@ public class Profile {
 
     /**
      * Change profile registration time
-     * @param registrationTime
+     * @param registrationTime - registration time
      */
 
     public void setRegistrationTime(Date registrationTime) {
@@ -110,7 +100,6 @@ public class Profile {
     }
 
     /**
-     *
      * @return user's sex
      */
     public Sex getSex() {
@@ -119,7 +108,7 @@ public class Profile {
 
     /**
      * Change users sex
-     * @param sex
+     * @param sex - sex
      */
 
     public void setSex(Sex sex) {
@@ -127,7 +116,6 @@ public class Profile {
     }
 
     /**
-     *
      * @return profiles id
      */
 
@@ -136,7 +124,6 @@ public class Profile {
     }
 
     /**
-     *
      * @return user's email
      */
 
@@ -146,39 +133,11 @@ public class Profile {
 
     /**
      * Change profile email
-     * @param email
+     * @param email - email
      */
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    /**
-     * Contain information about user's sex
-     * @author KostyaHrishenko
-     */
-
-
-    /**
-     * Counstruct new user's profile with given parameters
-     * @param id
-     * @param login
-     * @param password
-     * @param registrationTime
-     * @param name
-     * @param sex
-     * @param eMail
-     * @param category
-     */
-    public Profile(int id,String login, String password, Date registrationTime, String name, Sex sex, String eMail,ProfileCategory category) {
-        this.login = login;
-        this.password = password;
-        this.registrationTime = registrationTime;
-        this.name = name;
-        this.sex = sex;
-        this.email = eMail;
-        this.category = category;
-        this.id = id;
     }
 
     /**
@@ -190,18 +149,40 @@ public class Profile {
 
     /**
      * Change profile category
-     * @param category
+     * @param category - profile category
      */
     public void setCategory(ProfileCategory category) {
         this.category = category;
     }
 
     /**
-     * @return String representation of user's  profile
+     * @return String representation of user's profile
      */
-    @Override
     public String toString(){
       return id+ " "+login+" "+password+" "+registrationTime+" "+name+" "+sex+" "+email+" "+category;
+    }
+
+    /**
+     * All possible sexes
+     */
+    public enum Sex{
+        M("M"),F("F");
+        private String name;
+
+        /**
+         * Create new sex with given name
+         * @param name - sex name
+         */
+        Sex(String  name) {
+            this. name = name;
+        }
+
+        /**
+         * @return sex name
+         */
+        public String getName() {
+            return  name;
+        }
     }
 
 }

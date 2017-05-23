@@ -1,72 +1,135 @@
 package domain;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Contains informatin about an Order
  * @author KostyaHrishenko
  */
 public class Order {
-    private List<Position> positions;
+    private final int id;
     private Date creatingDate;
     private Date deliveryDate;
+    private String address;
+    private OrderState state;
+    private Offer offer;
+    private Profile customer;
 
     /**
-     * Create new order that coantains given positions an created on given creationDate
-     * @param positions all  positions in this order
-     * @param creatingDate when order was created
+     * Constructor
+     * @param id order id
+     * @param creatingDate order creating date
+     * @param deliveryDate order delivery date
+     * @param address order delivery address
+     * @param state order state
+     * @param offer offer that is ordered
+     * @param customer customer who made the order
      */
-    public Order(List<Position> positions, Date creatingDate) {
-        this.positions = positions;
+    public Order(int id, Date creatingDate, Date deliveryDate, String address, OrderState state, Offer offer, Profile customer) {
+        this.id = id;
         this.creatingDate = creatingDate;
+        this.deliveryDate = deliveryDate;
+        this.address = address;
+        this.state = state;
+        this.offer = offer;
+        this.customer = customer;
     }
 
     /**
-     *
-     * @return All positions in this order
+     * @return order id
      */
-    public List<Position> getPositions() {
-        return positions;
+    public int getId() {
+        return id;
     }
 
     /**
-     *
-     * @param positions - list with the order positions
-     */
-    public void setPositions(List<Position> positions) {
-        this.positions = positions;
-    }
-
-    /**
-     *
-     * @return - date when Order was created
+     * @return creating date
      */
     public Date getCreatingDate() {
         return creatingDate;
     }
 
     /**
-     * Chang date when Order was created
-     * @param creatingDate  -
-     */
-    public void setCreatingDate(Date creatingDate) {
-        this.creatingDate = creatingDate;
-    }
-
-    /**
-     *
-     * @return date when Order should be delivered
+     * @return delivery date
      */
     public Date getDeliveryDate() {
         return deliveryDate;
     }
 
     /**
-     * Change the date when Order should be delivere
-     * @param deliveryDate
+     * @return delivery address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * @return order state
+     */
+    public OrderState getState() {
+        return state;
+    }
+
+    /**
+     * @return offer
+     */
+    public Offer getOffer() {
+        return offer;
+    }
+
+    /**
+     * @return customer
+     */
+    public Profile getCustomer() {
+        return customer;
+    }
+
+    /**
+     * @param creatingDate - creating date
+     */
+    public void setCreatingDate(Date creatingDate) {
+        this.creatingDate = creatingDate;
+    }
+
+    /**
+     * @param deliveryDate - delivery date
      */
     public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
+    }
+
+    /**
+     * @param address - delivery address
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    /**
+     * @param state - order state
+     */
+    public void setState(OrderState state) {
+        this.state = state;
+    }
+
+    /**
+     * @param offer - offer
+     */
+    public void setOffer(Offer offer) {
+        this.offer = offer;
+    }
+
+    /**
+     * @param customer - customer
+     */
+    public void setCustomer(Profile customer) {
+        this.customer = customer;
+    }
+
+    /**
+     * @return String representation of order
+     */
+    public String toString(){
+        return id+ " "+creatingDate+" "+deliveryDate+" "+address+" "+state+" "+offer+" "+customer;
     }
 }

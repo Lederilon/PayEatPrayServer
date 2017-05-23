@@ -13,19 +13,34 @@ public class DAOFactoryMySQL implements DAOFactory {
 
     /**
      * Create factory for given connectionString
-     * @param connectionString
+     * @param connectionString connection string
      */
     public DAOFactoryMySQL(String connectionString){
         this.connectionString = connectionString;
     }
 
     /**
-     *
      * @return ProfileDAO- DAO that works with MySQL data base
      * @throws SQLException
      */
     public ProfileDAO getProfileDAO() throws SQLException {       ;
         return new ProfileDAOMySQL(this);
+    }
+
+    /**
+     * @return OrderDAO- DAO that works with MySQL data base
+     * @throws SQLException
+     */
+    public OrderDAO getOrderDAO() throws SQLException {
+        return new OrderDAOMySQL(this);
+    }
+
+    /**
+     * @return OfferDAO- DAO that works with MySQL data base
+     * @throws SQLException
+     */
+    public OfferDAO getOfferDAO() throws SQLException {
+        return new OfferDAOMySQL(this);
     }
 
     /**

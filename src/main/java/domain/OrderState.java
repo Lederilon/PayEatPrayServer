@@ -5,29 +5,65 @@ package domain;
  * @author KostyaHrishenko
  */
 public class OrderState {
-    private String name;
+    private final int id;
+    private StateNames name;
 
     /**
-     *
-     * @param name - order state name
+     * Constructor
+     * @param id - order id
+     * @param name - order name
      */
-    public OrderState(String name) {
+    public OrderState(int id, StateNames name) {
+        this.id = id;
         this.name = name;
     }
 
     /**
-     *
-     * @return String - order state name
+     * @return - order state id
      */
-    public String getName() {
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @return - order state name
+     */
+    public StateNames getName(){
         return name;
     }
 
     /**
-     * Change order state name
-     * @param name - order state name
+     * All names that states can have
      */
-    public void setName(String name) {
-        this.name = name;
+    public enum StateNames{
+        R("Reviewed"),
+        A("Accepted"),
+        D("Declined"),
+        E("Executed");
+
+        private String name;
+
+        /**
+         * Crate state with given name
+         * @param name - state name
+         */
+        StateNames(String  name) {
+            this. name = name;
+        }
+
+        /**
+         * @return state name
+         */
+        public String getName() {
+            return name;
+        }
+
+    }
+
+    /**
+     * @return  String representation of a order state
+     */
+    public String toString(){
+        return id + " " + name.getName();
     }
 }

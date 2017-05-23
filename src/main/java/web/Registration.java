@@ -33,7 +33,7 @@ public class Registration extends javax.servlet.http.HttpServlet {
           try {
               //Class.forName("com.mysql.jdbc.Driver");
               java.sql.DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-              DAOFactory daoFActory = new DAOFactoryMySQL("jdbc:mysql://localhost:3306/PAYEATPRAY?user=root&password=FICTIO53");
+              DAOFactory daoFActory = new DAOFactoryMySQL("jdbc:mysql://localhost:3306/payeatpray?user=root&password=rootme");
               ProfileDAO profileRep = daoFActory.getProfileDAO();
               Date date = new Date();
               ProfileCategory category = null;

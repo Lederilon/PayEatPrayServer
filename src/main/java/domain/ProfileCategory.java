@@ -6,19 +6,31 @@ package domain;
  */
 public class ProfileCategory {
     private final int id;
+    private CategoryNames name;
 
+    /**
+     * Constructor
+     * @param id - category id
+     * @param name - category name
+     */
     public ProfileCategory(int id, CategoryNames name) {
         this.id = id;
         this.name = name;
     }
 
     /**
-     *
      * @return category id
-     *
      */
     public int getId() {
         return id;
+    }
+
+    /**
+     * @return - category name
+     */
+    public CategoryNames getName()
+    {
+        return name;
     }
 
     /**
@@ -32,33 +44,27 @@ public class ProfileCategory {
         private String name;
 
         /**
-         * Crate categiry with given name
-         * @param name
+         * Crate category with given name
+         * @param name - category name
          */
          CategoryNames(String  name) {
             this. name = name;
         }
 
         /**
-         *
          * @return category name
          */
         public String getName() {
             return  name;
         }
 
-    };
-    private CategoryNames name;
-    public CategoryNames getName()
-    {
-        return name;
     }
+
     /**
-     *
-     * @return  String representation of profile category
+     * @return  String representation of a profile category
      */
     public String toString(){
-        return id + " " +name.getName();
+        return id + " " + name.getName();
 }
 
 }

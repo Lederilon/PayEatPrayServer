@@ -15,6 +15,12 @@ public interface DAOFactory {
    */
   public ProfileDAO getProfileDAO() throws SQLException;
   /**
+   * Create orderDAO
+   * @return OrderDAO
+   * @throws SQLException
+   */
+  public OrderDAO getOrderDAO() throws SQLException;
+  /**
    *Create new connection
    * @return Connection
    * @throws SQLException

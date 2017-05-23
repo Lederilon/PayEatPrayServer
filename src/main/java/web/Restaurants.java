@@ -21,7 +21,7 @@ public class Restaurants extends javax.servlet.http.HttpServlet  {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        try {
             java.sql.DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            DAOFactory daoFActory = new DAOFactoryMySQL("jdbc:mysql://localhost:3306/PAYEATPRAY?user=root&password=FICTIO53");
+            DAOFactory daoFActory = new DAOFactoryMySQL("jdbc:mysql://localhost:3306/payeatpray?user=root&password=rootme");
             ProfileDAO profileRep = daoFActory.getProfileDAO();
             List<Profile> profiles = profileRep.getAll();
             List<Profile> restaurants = new LinkedList<Profile>();

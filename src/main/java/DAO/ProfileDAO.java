@@ -13,15 +13,15 @@ import java.util.List;
  */
 public interface ProfileDAO {
     /**
-     *Create new profile and ad it ro the data base
-     * @param login
-     * @param password
-     * @param registrationTime
-     * @param name
-     * @param sex
-     * @param eMail
-     * @param category
-     * @return Profile - created profile
+     * Create new profile in database
+     * @param login profile login
+     * @param password prifile password
+     * @param registrationTime registration time
+     * @param name profile name
+     * @param sex profile sex
+     * @param eMail profile eMail
+     * @param category profile category
+     * @return Profile
      */
     public Profile createProfile(String login, String password, Date registrationTime, String name, Profile.Sex sex, String eMail, ProfileCategory category) throws SQLException;
 
@@ -42,7 +42,7 @@ public interface ProfileDAO {
      * Update given Profile in data base
      * @param profile - profile to update
      */
-    public void updateProfile(Profile profile);
+    public void updateProfile(Profile profile) throws SQLException;
 
     /**
      *Find all profiles in data base
